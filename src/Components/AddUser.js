@@ -1,43 +1,80 @@
-import { Button, Container, Grid, TextField, Typography } from '@material-ui/core'
-import React from 'react'
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import {
+  Box,
+  Button,
+  makeStyles,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import React from "react";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useState } from "react";
+import { addUser } from "../features/Users";
+import { useDispatch } from "react-redux";
+
+const useStyles = makeStyles({
+  field: {
+    marginTop: 30,
+    marginBottom: 30,
+    display: "block",
+  },
+});
 
 export default function AddUser() {
-    return (
-        <Container>
-            <Grid container spacing={2}>
-                <Grid item xs={8}>
-                    <Typography
-                        variant='h6'
-                        color='textSecondary'
-                        component='h2'
-                        gutterBottom>
-                        Create new user
-                    </Typography>
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
 
-                    <form noValidate autoComplete='off'>
-                        <TextField
-                            label='Name'
-                            variant='outlined'
-                            color='secondary'></TextField>
+  const classes = useStyles();
+  return (
+    <Box
+      sx={{
+        width: 100,
+        maxWidth: "100%",
+      }}
+    >
+      <Typography
+        variant="h6"
+        color="textSecondary"
+        component="h2"
+        gutterBottom
+      >
+        Create new user
+      </Typography>
 
-                    </form>
-                    <Button
-                        onClick={() => alert('You clicked me ')}
-                        type='submit'
-                        color='secondary'
-                        variant='contained'
-                        endIcon={<ArrowForwardIcon></ArrowForwardIcon>}
-                    >ADD</Button>
-                </Grid>
-                <Grid item xs={4}>
-
-                </Grid>
-            </Grid>
-
-
-
-
-        </Container>
-    )
+      <form noValidate autoComplete="off">
+        <TextField
+          className={classes.field}
+          fullWidth
+          label="Name"
+          variant="outlined"
+          color="secondary"
+          value={name}
+          onChange={(e) => {
+            setName(e.target.value);
+          }}
+        ></TextField>
+        <TextField
+          className={classes.field}
+          fullWidth
+          label="Username"
+          variant="outlined"
+          color="secondary"
+          value={username}
+          onChange={(e) => {
+            setUsername(e.target.value);
+          }}
+        ></TextField>
+      </form>
+      <Button
+        onClick={() => {
+          dispatch(addUser({ id: 0, name: name, username: username }));
+        }}
+        color="secondary"
+        variant="contained"
+        endIcon={<ArrowForwardIcon></ArrowForwardIcon>}
+      >
+        ADD
+      </Button>
+    </Box>
+  );
 }
