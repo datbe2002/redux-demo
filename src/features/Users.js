@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import UsersData from "../Components/ListOfUsers";
+
 export const userSlice = createSlice({
   name: "users",
   initialState: { value: UsersData },

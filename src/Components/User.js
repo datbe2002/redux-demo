@@ -55,7 +55,7 @@ export default function User() {
                   dispatch(
                     updateUsername({
                       id: user.id,
-                      username: user.newUsername,
+                      username: newUsername,
                     })
                   );
                 }}

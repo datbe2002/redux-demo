@@ -10,6 +10,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useState } from "react";
 import { addUser } from "../features/Users";
 import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 
 const useStyles = makeStyles({
   field: {
@@ -67,7 +68,7 @@ export default function AddUser() {
       </form>
       <Button
         onClick={() => {
-          dispatch(addUser({ id: 0, name: name, username: username }));
+          dispatch(addUser({ id: nanoid(), name: name, username: username }));
         }}
         color="secondary"
         variant="contained"
